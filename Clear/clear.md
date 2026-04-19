@@ -73,7 +73,7 @@ Supprime tous les fichiers dans ces dossiers, en conservant les dossiers vides e
 
 **Ne supprime pas les dossiers eux-mêmes** — conserve la structure vide pour que le wiki soit prêt à recevoir du nouveau contenu immédiatement.
 
-**Ne touche pas à** : `CLAUDE.md`, `.claude/`, `.obsidian/`, `raw/`, `wiki/context/`.
+**Ne touche pas à** : `CLAUDE.md`, `.claude/`, `.obsidian/`, `wiki/context/`. Les dossiers `raw/` et `Clippings/` seront traités séparément à l'étape 5.
 
 ---
 
@@ -119,7 +119,63 @@ Ajoute une entrée dans `log.md` qui documente le clear, sans supprimer l'histor
 
 ---
 
-## Step 5 — Décision sur project-context.md
+## Step 5 — Décision sur raw/ et Clippings/
+
+Avant de traiter le project-context, pose ces deux questions séparément.
+
+**Question 1 — Dossier raw/**
+
+```
+Le dossier raw/ contient tes sources brutes (articles clippés, documents importés).
+Souhaites-tu également supprimer tous les fichiers dans raw/ ?
+
+  → "oui" : tous les fichiers dans raw/ seront supprimés.
+             Le dossier vide sera conservé.
+
+  → "non" : raw/ est conservé intact.
+
+Supprimer raw/ ? (oui / non)
+```
+
+**Si l'utilisateur répond "oui"** :
+- Supprime tous les fichiers dans `raw/` en conservant le dossier vide
+- Note dans le log : `- raw/ : [N] fichiers supprimés`
+
+**Si l'utilisateur répond "non"** :
+- Ne touche pas à `raw/`
+- Note dans le log : `- raw/ : conservé`
+
+---
+
+**Question 2 — Dossier Clippings/ (si il existe)**
+
+Vérifie d'abord si le dossier `Clippings/` existe dans le projet. Si le dossier n'existe pas, saute cette question silencieusement.
+
+Si le dossier existe, pose cette question :
+
+```
+Le dossier Clippings/ contient tes articles clippés depuis Obsidian Web Clipper.
+Souhaites-tu également supprimer tous les fichiers dans Clippings/ ?
+
+  → "oui" : tous les fichiers dans Clippings/ seront supprimés.
+             Le dossier vide sera conservé.
+
+  → "non" : Clippings/ est conservé intact.
+
+Supprimer Clippings/ ? (oui / non)
+```
+
+**Si l'utilisateur répond "oui"** :
+- Supprime tous les fichiers dans `Clippings/` en conservant le dossier vide
+- Note dans le log : `- Clippings/ : [N] fichiers supprimés`
+
+**Si l'utilisateur répond "non"** :
+- Ne touche pas à `Clippings/`
+- Note dans le log : `- Clippings/ : conservé`
+
+---
+
+## Step 6 — Décision sur project-context.md
 
 Une fois toutes les suppressions effectuées, pose cette question à l'utilisateur :
 
@@ -151,7 +207,7 @@ Supprimer également project-context.md ? (oui / non)
 
 ---
 
-## Step 6 — Commit Git final (si disponible)
+## Step 7 — Commit Git final (si disponible)
 
 Si Git est initialisé, crée un commit final qui documente le clear :
 
@@ -162,7 +218,7 @@ git commit -m "clear: wiki reset — [N] fichiers supprimés"
 
 ---
 
-## Step 7 — Rapport final
+## Step 8 — Rapport final
 
 Affiche un résumé complet :
 
@@ -174,6 +230,8 @@ Fichiers supprimés :
   wiki/concepts/    : N fichiers
   wiki/entities/    : N fichiers
   wiki/analyses/    : N fichiers
+  raw/              : N fichiers / conservé
+  Clippings/        : N fichiers / conservé / inexistant
   project-context   : supprimé / conservé
 
 Fichiers réinitialisés :
