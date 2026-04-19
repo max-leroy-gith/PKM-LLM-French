@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(wiki/**)",
+      "Read(raw/**)",
+      "Read(Clippings/**)",
+      "Read(index.md)",
+      "Read(log.md)",
+      "Read(CLAUDE.md)",
+      "Write(wiki/**)",
+      "Write(raw/**)",
+      "Write(Clippings/**)",
+      "Edit(wiki/**)",
+      "Edit(index.md)",
+      "Edit(log.md)"
+    ]
+  }
+}
